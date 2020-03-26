@@ -54,7 +54,7 @@ UserSchema.virtual("password")
     return this._password;
   });
 
-UserSchema.method({
+UserSchema.methods = {
   securePassword: function(plainPassword) {
     if (!plainPassword) return "";
     try {
@@ -71,7 +71,7 @@ UserSchema.method({
   authenticate: function(plainPassword) {
     return this.securePassword(plainPassword) === this.encry_password;
   }
-});
+};
 
 const User = mongoose.model("User", UserSchema);
 
