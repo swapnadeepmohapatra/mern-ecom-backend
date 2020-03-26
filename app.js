@@ -7,6 +7,8 @@ const cors = require("cors");
 
 const app = express();
 
+const authRoutes = require("./routes/auth");
+
 mongoose
   .connect(process.env.DATABASE, {
     useNewUrlParser: true,
@@ -24,9 +26,11 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("Hey");
-});
+app.use("/api", authRoutes);
+
+// app.get("/", (req, res) => {
+//   res.send("Hey");
+// });
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
