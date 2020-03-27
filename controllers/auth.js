@@ -70,3 +70,13 @@ exports.isSignedIn = expressJwt({
   secret: process.env.SECRET,
   userProperty: "auth"
 });
+
+exports.isAuthenticated = (req, res, next) => {
+  let checker = req.proflie && req.auth && req.proflie._id === req.auth._id;
+  if (!checker) {
+    return res.status(403).json({
+      error: "access denied"
+    });
+  }
+  next();
+};
