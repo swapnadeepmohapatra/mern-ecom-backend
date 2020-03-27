@@ -55,3 +55,32 @@ exports.userPurchaseList = (req, res) => {
       res.json(order);
     });
 };
+
+exports.pushOrderInPurchaseList = (req, res, next) => {
+  let purchases = [];
+  req.body.order.products.forEach(element => {
+    purchases.push({
+      _id: element._id,
+      name: element.name,
+      description: element.description,
+      category: element.category,
+      quantity: element.quantity,
+      amount: req.body.order.amount,
+      transaction_id: req.body.order.transaction_id
+    });
+  });
+
+  User.findOneAndUpdate(
+    { _id: req.profile._id },
+    { $push: { purchases: purchases } },
+    { new: true },
+    (error, purchases) => {
+      if (error) {
+        return res.status(400).json({
+          error: "Unable to save purchase"
+        });
+      }
+      next();
+    }
+  );
+};
