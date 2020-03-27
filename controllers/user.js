@@ -22,7 +22,7 @@ exports.getUser = (req, res) => {
   return res.json(req.profile);
 };
 
-exports.updateUser = (res, req) => {
+exports.updateUser = (req, res) => {
   User.findByIdAndUpdate(
     { _id: req.profile._id },
     { $set: req.body },
@@ -37,7 +37,7 @@ exports.updateUser = (res, req) => {
       user.encry_password = undefined;
       user.createdAt = undefined;
       user.updatedAt = undefined;
-      return res.json(user);
+      res.json(user);
     }
   );
 };
