@@ -25,5 +25,9 @@ exports.signup = (req, res) => {
 };
 
 exports.signout = (req, res) => {
-  res.json({ message: "Signup" });
+  res.json({ message: "Signout" });
+};
+
+exports.signin = (req, res) => {
+  res.json({ message: "Signin" });
 };
