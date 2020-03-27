@@ -27,7 +27,8 @@ exports.signup = (req, res) => {
 };
 
 exports.signout = (req, res) => {
-  res.json({ message: "Signout" });
+  res.clearCookie("token");
+  res.json({ message: "User Signout Successful" });
 };
 
 exports.signin = (req, res) => {
@@ -41,7 +42,7 @@ exports.signin = (req, res) => {
   }
 
   User.findOne({ email }, (error, user) => {
-    if (error) {
+    if (error || !user) {
       return res.status(400).json({ error: "User doesn't exist" });
     }
 
