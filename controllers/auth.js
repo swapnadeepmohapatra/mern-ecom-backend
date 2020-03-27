@@ -72,7 +72,7 @@ exports.isSignedIn = expressJwt({
 });
 
 exports.isAuthenticated = (req, res, next) => {
-  let checker = req.proflie && req.auth && req.proflie._id === req.auth._id;
+  let checker = req.profile && req.auth && req.profile._id == req.auth._id;
   if (!checker) {
     return res.status(403).json({
       error: "access denied"
@@ -82,7 +82,7 @@ exports.isAuthenticated = (req, res, next) => {
 };
 
 exports.isAdmin = (req, res, next) => {
-  if (req.proflie.role === 0) {
+  if (req.profile.role === 0) {
     res.status(403).json({
       message: "You are not an admin, access denied"
     });
