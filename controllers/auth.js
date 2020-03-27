@@ -80,3 +80,12 @@ exports.isAuthenticated = (req, res, next) => {
   }
   next();
 };
+
+exports.isAdmin = (req, res, next) => {
+  if (req.proflie.role === 0) {
+    res.status(403).json({
+      message: "You are not an admin, access denied"
+    });
+  }
+  next();
+};
