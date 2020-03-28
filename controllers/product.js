@@ -26,7 +26,15 @@ exports.createProduct = (req, res) => {
         error: "problem with image"
       });
     }
-    // TODO: restrictions in the fields
+
+    const { name, descripiton, price, category, stock } = fields;
+
+    if (!name || !descripiton || !price || !category || !stock) {
+      return res.status(400).json({
+        error: "Please include all fields"
+      });
+    }
+
     let product = new Product(fields);
 
     if (file.photo) {
