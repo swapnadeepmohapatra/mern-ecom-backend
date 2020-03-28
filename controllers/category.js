@@ -23,3 +23,7 @@ exports.createCategory = (req, res) => {
     return res.json({ category });
   });
 };
+
+exports.getCategory = (req, res) => {
+  return res.json(req.category);
+};
