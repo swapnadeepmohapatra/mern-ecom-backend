@@ -13,7 +13,7 @@ router.post(
   isSignedIn,
   isAuthenticated,
   isAdmin,
-  createCategpry
+  createCategory
 );
 
 module.exports = router;

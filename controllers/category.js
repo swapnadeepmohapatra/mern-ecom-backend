@@ -12,7 +12,7 @@ exports.getCategoryById = (req, res, next, id) => {
   });
 };
 
-exports.createCategpry = (req, res) => {
+exports.createCategory = (req, res) => {
   const category = new Category(req.body);
   category.save((error, category) => {
     if (error) {
