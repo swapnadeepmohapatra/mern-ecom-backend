@@ -38,3 +38,17 @@ exports.getAllCategory = (req, res) => {
     res.json(categories);
   });
 };
+
+exports.updateCategory = (req, res) => {
+  const category = req.category;
+  category.name = req.body.name;
+
+  category.save((error, updatedCategory) => {
+    if (error) {
+      return res.status(400).json({
+        error: "Category couldn't be updated"
+      });
+    }
+    res.json(updatedCategory);
+  });
+};
