@@ -4,7 +4,8 @@ const router = express.Router();
 const {
   getProductById,
   createProduct,
-  getProduct
+  getProduct,
+  photo
 } = require("../controllers/product");
 const { isAdmin, isAuthenticated, isSignedIn } = require("../controllers/auth");
 const { getUserById } = require("../controllers/user");
@@ -20,5 +21,6 @@ router.post(
   createProduct
 );
 router.get("/product/:productId", getProduct);
+router.get("/product/photo/:productId", photo);
 
 module.exports = router;
