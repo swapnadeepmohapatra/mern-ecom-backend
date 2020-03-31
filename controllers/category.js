@@ -4,7 +4,7 @@ exports.getCategoryById = (req, res, next, id) => {
   Category.findById(id).exec((error, category) => {
     if (error) {
       return res.status(400).json({
-        error: error
+        error: error.errmsg
       });
     }
     req.category = category;
@@ -17,7 +17,7 @@ exports.createCategory = (req, res) => {
   category.save((error, category) => {
     if (error) {
       return res.status(400).json({
-        error: error
+        error: error.errmsg
       });
     }
     return res.json({ category });
@@ -32,7 +32,7 @@ exports.getAllCategory = (req, res) => {
   Category.find().exec((error, categories) => {
     if (error) {
       return res.status(400).json({
-        error: error
+        error: error.errmsg
       });
     }
     res.json(categories);
@@ -46,7 +46,7 @@ exports.updateCategory = (req, res) => {
   category.save((error, updatedCategory) => {
     if (error) {
       return res.status(400).json({
-        error: error
+        error: error.errmsg
       });
     }
     res.json(updatedCategory);
@@ -59,7 +59,7 @@ exports.deleteCategory = (req, res) => {
   category.remove((error, deletedCategory) => {
     if (error) {
       return res.status(400).json({
-        error: error
+        error: error.errmsg
       });
     }
     res.json({
