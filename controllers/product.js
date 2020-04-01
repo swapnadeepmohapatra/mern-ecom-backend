@@ -29,9 +29,29 @@ exports.createProduct = (req, res) => {
 
     const { name, descripiton, price, category, stock } = fields;
 
-    if (!name || !descripiton || !price || !category || !stock) {
+    if (!name) {
       return res.status(400).json({
-        error: "Please include all fields"
+        error: "name field is required"
+      });
+    }
+    if (!descripiton) {
+      return res.status(400).json({
+        error: "descripiton required"
+      });
+    }
+    if (!price) {
+      return res.status(400).json({
+        error: "price required"
+      });
+    }
+    if (!category) {
+      return res.status(400).json({
+        error: "category required"
+      });
+    }
+    if (!stock) {
+      return res.status(400).json({
+        error: "stock required"
       });
     }
 
