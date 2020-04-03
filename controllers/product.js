@@ -22,7 +22,7 @@ exports.createProduct = (req, res) => {
   form.keepExtension = true;
   form.parse(req, (error, fields, file) => {
     if (error) {
-      res.status(400).json({
+      return res.status(400).json({
         error: "problem with image"
       });
     }
