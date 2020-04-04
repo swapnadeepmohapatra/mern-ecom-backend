@@ -1,4 +1,4 @@
-const stripe = require("stripe")("Key");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const uuid = require("uuid/v4");
 
 exports.makePayment = (req, res) => {
@@ -25,11 +25,15 @@ exports.makePayment = (req, res) => {
           currency: "inr",
           customer: customer.id,
           receipt_email: token.email,
-          description: `purchase of ${product.name}`,
+          description: `purchase of gadgets`,
           shipping: {
             name: token.card.name,
             address: {
-              country: token.card.address_country
+              line1: token.card.address_line1,
+              line2: token.card.address_line2,
+              city: token.card.address_city,
+              country: token.card.address_country,
+              postal_code: token.card.address_zip
             }
           }
         },
