@@ -6,7 +6,7 @@ exports.getOrderById = (req, res, next, id) => {
     .exec((error, order) => {
       if (error) {
         res.statis(400).json({
-          error: "No order found"
+          error: "No order found",
         });
       }
       req.order = order;
@@ -16,12 +16,12 @@ exports.getOrderById = (req, res, next, id) => {
 
 exports.createOrder = (req, res) => {
   req.body.order.user = req.profile;
-  const order = new Order(req.body.order.user);
+  const order = new Order(req.body.order);
 
   order.save((error, order) => {
     if (error) {
       return res.status(400).json({
-        error: "Failed to save order"
+        error: error,
       });
     }
 
@@ -35,7 +35,7 @@ exports.getAllOrders = (req, res) => {
     .exec((error, orders) => {
       if (error) {
         return res.status(400).json({
-          error: "No order found"
+          error: "No order found",
         });
       }
       res.json(orders);
@@ -53,7 +53,7 @@ exports.updateStatus = (req, res) => {
     (error, order) => {
       if (error) {
         return res.status(400).json({
-          error: "Cannot update order status"
+          error: "Cannot update order status",
         });
       }
       res.json(order);

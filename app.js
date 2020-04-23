@@ -12,18 +12,19 @@ const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
 const productRoutes = require("./routes/product");
 const orderRoutes = require("./routes/order");
-const stripeRoutes = require("./routes/stripePayment");
+const paymentRoutes = require("./routes/payment");
 
 mongoose
   .connect(process.env.DATABASE, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useFindAndModify: false,
   })
   .then(() => {
     console.log("db Connected");
   })
-  .catch(error => {
+  .catch((error) => {
     console.log(error);
   });
 
@@ -36,7 +37,7 @@ app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
 app.use("/api", orderRoutes);
-app.use("/api", stripeRoutes);
+app.use("/api", paymentRoutes);
 
 // app.get("/", (req, res) => {
 //   res.send("Hey");
